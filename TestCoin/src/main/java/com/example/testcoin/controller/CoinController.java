@@ -51,23 +51,23 @@ public class CoinController {
 
         int pageNum,pageSize, numOfPage;
 
-        try {
-            pageNum = Integer.parseInt(pageNumString);
-            pageSize = Integer.parseInt(pageSizeString);
-            if(pageNum <= 0 || pageSize <= 0){
-                throw  new NumberFormatException("Page size and page number must be a positive integer.");
-            }
-            numOfPage = currencies.length / pageSize;
-            if(pageNum > numOfPage){
-                throw  new Exception("Page number cannot be greater than the number of page");
-            }
-        }catch (Exception e){
-                throw new NumberFormatException("Page size and page number must be a positive integer.");
-        }
+//        try {
+//            pageNum = Integer.parseInt(pageNumString);
+//            pageSize = Integer.parseInt(pageSizeString);
+//            if(pageNum <= 0 || pageSize <= 0){
+//                throw  new NumberFormatException("Page size and page number must be a positive integer.");
+//            }
+//            numOfPage = currencies.length / pageSize;
+//            if(pageNum > numOfPage){
+//                throw  new Exception("Page number cannot be greater than the number of page");
+//            }
+//        }catch (Exception e){
+//                throw new NumberFormatException("Page size and page number must be a positive integer.");
+//        }
 
-//        pageNum = Integer.parseInt(pageNumString);
-//        pageSize = Integer.parseInt(pageSizeString);
-//        numOfPage = currencies.length / pageSize;
+        pageNum = Integer.parseInt(pageNumString);
+        pageSize = Integer.parseInt(pageSizeString);
+        numOfPage = currencies.length / pageSize;
 
         if(pageSize >= currencies.length){
             return currencies;
