@@ -25,4 +25,10 @@ public class ExceptionHandler {
         return new ErrorMessage(500,"Page number cannot be greater than the number of page!");
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorMessage handleAllException(Exception e, WebRequest request){
+        return new ErrorMessage(500,e.getLocalizedMessage());
+    }
+
 }
