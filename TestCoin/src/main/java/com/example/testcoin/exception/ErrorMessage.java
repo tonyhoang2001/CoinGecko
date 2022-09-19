@@ -1,4 +1,4 @@
-package com.example.testcoin;
+package com.example.testcoin.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

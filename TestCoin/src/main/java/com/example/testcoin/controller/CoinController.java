@@ -34,40 +34,35 @@ public class CoinController {
 //        return coin;
 //    }
 
-    @GetMapping(value = "/coin/{coinId}")
-    public Coin getCoinInfo(@PathVariable("coinId") String coinId){
-        Coin coin = restTemplate.getForObject(
-                URLCoin + coinId, Coin.class);
+    public CoinDetail getCoinInfo(String coinId){
+        CoinDetail coin = restTemplate.getForObject(
+                URLCoin + coinId, CoinDetail.class);
         return coin;
     }
 
-    @GetMapping(value = "/currency/{cur}")
-    public Currency[] getCurrentcyInfo(@PathVariable("cur") String currency,
-                                       String pageNumString,
-                                       String pageSizeString) {
 
-        Currency[] currencies =  restTemplate.getForObject(
-                URLCurrency + currency, Currency[].class);
+    public Coin[] getCurrentcyInfo(String currency,
+                                   String page,
+                                   String per_page) {
 
-        int pageNum,pageSize, numOfPage;
+        Coin[] currencies =  restTemplate.getForObject(
+                URLCurrency + currency, Coin[].class);
 
-//        try {
-//            pageNum = Integer.parseInt(pageNumString);
-//            pageSize = Integer.parseInt(pageSizeString);
-//            if(pageNum <= 0 || pageSize <= 0){
-//                throw  new NumberFormatException("Page size and page number must be a positive integer.");
-//            }
-//            numOfPage = currencies.length / pageSize;
-//            if(pageNum > numOfPage){
-//                throw  new Exception("Page number cannot be greater than the number of page");
-//            }
-//        }catch (Exception e){
-//                throw new NumberFormatException("Page size and page number must be a positive integer.");
-//        }
+        int pageNum,pageSize;
 
-        pageNum = Integer.parseInt(pageNumString);
-        pageSize = Integer.parseInt(pageSizeString);
-        numOfPage = currencies.length / pageSize;
+        //check page number
+        if(page == null){
+            pageNum = 1;
+        }else {
+            pageNum = Integer.parseInt(page);
+        }
+
+        //check size of a page
+        if(per_page == null){
+            pageSize = 10;
+        }else{
+            pageSize = Integer.parseInt(per_page);
+        }
 
         if(pageSize >= currencies.length){
             return currencies;
@@ -78,17 +73,17 @@ public class CoinController {
         return currencies;
     }
 
-    @GetMapping(value = "/custom/{currency}")
-    public CustomCoinList getCustomInfo(@PathVariable("currency") String currency,
-                                        @RequestParam(value = "page",defaultValue = "1") String pageNum,
-                                        @RequestParam(value = "size",defaultValue = "10") String pageSize){
+    @GetMapping(value = "/v3/coins/get_coins")
+    public CustomCoinList getCustomInfo(@RequestBody CoinRequest coinRequest){
 
-        Currency[] currencies = getCurrentcyInfo(currency,pageNum,pageSize);
+        Coin[] currencies = getCurrentcyInfo(coinRequest.getCurrency(),
+                                                 coinRequest.getPage(),
+                                                 coinRequest.getPer_page());
 
         CustomCoinList customCoinList = new CustomCoinList();
 
         for (int i = 0; i < currencies.length; i++) {
-            Coin coin = getCoinInfo(currencies[i].getId());
+            CoinDetail coin = getCoinInfo(currencies[i].getId());
             customCoinList.getCustomCoins().add(
                     new CustomCoin(
                                     currencies[i].getId(),
@@ -104,7 +99,6 @@ public class CoinController {
         }
 
         return customCoinList;
-
     }
 
 }
