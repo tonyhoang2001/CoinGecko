@@ -1,10 +1,10 @@
-package com.example.coingecko;
+package com.example.testcoin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CoinGeckoApplicationTests {
+class TestCoinApplicationTests {
 
     @Test
     void contextLoads() {
