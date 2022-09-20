@@ -48,6 +48,10 @@ public class CoinController {
         Coin[] currencies =  restTemplate.getForObject(
                 URLCurrency + currency, Coin[].class);
 
+        if (currencies == null || currencies.length == 0){
+
+        }
+
         int pageNum,pageSize;
 
         //check page number

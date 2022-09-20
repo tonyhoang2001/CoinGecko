@@ -13,9 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CoinDto {
     @JsonIgnore
-    @JsonProperty("id")
-    private int idName;
-    private String currency;
+    private int id;
     private String symbol;
     private String name;
     private String image;

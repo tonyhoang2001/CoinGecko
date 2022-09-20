@@ -14,10 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CoinDetailDto {
-    @JsonIgnore
-    private int id;
-    @JsonProperty("description")
     private DescriptionDto description;
-    @JsonProperty("tickers")
     private List<TicketDto> tickets;
 }
