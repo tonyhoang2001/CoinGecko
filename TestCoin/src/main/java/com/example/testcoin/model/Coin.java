@@ -16,7 +16,11 @@ import java.io.Serializable;
 @Table(name = "coin")
 public class Coin implements Serializable {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "primary_key")
+    private int id;
+    private String idName;
+    private String currency;
     private String symbol;
     private String name;
     private String image;

@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,9 +17,12 @@ import java.util.List;
 @Table(name = "coin_detail")
 public class CoinDetail implements Serializable {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @OneToOne(mappedBy = "coinDetail")
     private Description description;
-//    private List<Ticket> tickets;
+    @OneToMany(mappedBy = "coinDetail")
+    private List<Ticket> tickets;
     @OneToOne(mappedBy = "coinDetail")
     private Coin coin;
 }
