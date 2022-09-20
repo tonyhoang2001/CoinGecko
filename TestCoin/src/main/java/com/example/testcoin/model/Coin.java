@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Coin implements Serializable {
-    private int id;
+    private String id;
     private String symbol;
     private String name;
     private String image;

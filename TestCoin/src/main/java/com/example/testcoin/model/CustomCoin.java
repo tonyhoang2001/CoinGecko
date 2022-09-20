@@ -28,4 +28,15 @@ public class CustomCoin implements Serializable {
     private double currentPrice;
     private String description;
     private String tradeUrl;
+
+    public CustomCoin(String id, String symbol, String name, String image, double priceChangePercentage24h, double currentPrice, String description, String tradeUrl) {
+        this.id = id;
+        this.symbol = symbol;
+        this.name = name;
+        this.image = image;
+        this.priceChangePercentage24h = priceChangePercentage24h;
+        this.currentPrice = currentPrice;
+        this.description = description;
+        this.tradeUrl = tradeUrl;
+    }
 }
