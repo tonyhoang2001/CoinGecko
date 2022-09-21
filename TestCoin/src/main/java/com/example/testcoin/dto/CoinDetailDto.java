@@ -1,6 +1,5 @@
 package com.example.testcoin.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,5 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CoinDetailDto {
     private DescriptionDto description;
+    @JsonProperty("tickers")
     private List<TicketDto> tickets;
 }

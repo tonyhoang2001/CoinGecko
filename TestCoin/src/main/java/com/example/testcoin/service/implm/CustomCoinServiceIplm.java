@@ -24,16 +24,13 @@ public class CustomCoinServiceIplm implements CustomCoinService {
     private final CustomCoinMapping customCoinMapping;
 
     @Override
-    public Page<CustomCoinDto> getAll(Pageable pageable) {
-        pageable = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize());
+    public List<CustomCoinDto> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
         Page<CustomCoin> customCoinDtos = customCoinRepository.findAll(pageable);
-        Page<CustomCoinDto> customCoinDtoPage = new PageImpl<>(customCoinDtos
+        List<CustomCoinDto> customCoinDtoList = customCoinDtos.stream().collect(Collectors.toList())
                                                 .stream()
-                                                .collect(Collectors.toList())
-                                                .stream()
-                                                .map(customCoinMapping::toDto)
-                                                .collect(Collectors.toList())) ;
-        return customCoinDtoPage;
+                                                .map(customCoinMapping::toDto).collect(Collectors.toList());
+        return customCoinDtoList;
     }
 
     @Override

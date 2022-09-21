@@ -11,6 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CoinRequest {
     private String currency;
-    private String page;
-    private String per_page;
+    private int page;
+    private int per_page;
 }
